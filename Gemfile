@@ -41,6 +41,8 @@ gem 'foreman'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'rspec'
+gem 'simplecov'
 
 # PRETTIES
 gem 'haml-rails'
