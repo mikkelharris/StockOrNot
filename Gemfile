@@ -34,6 +34,7 @@ end
 
 #WEB SERVER
 gem 'puma'
+gem 'foreman'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development

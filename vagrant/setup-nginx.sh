@@ -7,5 +7,5 @@ cd /etc/nginx
 less nginx.conf
 cd sites-enabled
 sudo rm default
-sudo ln -s /vagrant/config/nginx.conf projectname
+# sudo ln -s /vagrant/config/nginx.conf projectname
 sudo service nginx restart
