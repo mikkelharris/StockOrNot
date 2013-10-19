@@ -24,6 +24,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, :path => "./vagrant/install-rvm.sh",  :args => "stable"
   config.vm.provision :shell, :path => "./vagrant/install-ruby.sh", :args => "2.0.0-p247 rails haml-rails"
   config.vm.provision :shell, :path => "./vagrant/setup-nginx.sh"
-  # config.vm.provision :shell, :path => "./vagrant/setup-unicorn.sh"
-  config.vm.provision :shell, :path => "./vagrant/restart_servers.sh"
+  config.vm.provision :shell, :path => "./vagrant/install-postgres.sh"
+  config.vm.provision :shell, :path => "./vagrant/setup-postgres.sh"
+  config.vm.provision :shell, :path => "./vagrant/setup-puma.sh"
+  # config.vm.provision :shell, :path => "./vagrant/restart_servers.sh"
 end
