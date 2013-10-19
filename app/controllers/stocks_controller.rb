@@ -1,5 +1,5 @@
 class StocksController < ApplicationController
-	include StocksHelper
+	include StocksHelper, ApplicationHelper
 	before_filter :set_stock, :only => %w{edit update show}
 
 	def show
@@ -13,16 +13,11 @@ class StocksController < ApplicationController
 		stock_params[:stock_symbol] = stock_params[:stock_symbol].upcase
 
 		@stock = Stock.find_by(stock_symbol: stock_params[:stock_symbol])
-		if !@stock
-			@stock = Stock.new(stock_params)
-		end
+		@stock = Stock.new(stock_params) if @stock.nil?
 
 		value = get_value_for_symbol(@stock.stock_symbol)
-		@stock_value = StockValue.find_by(value: value, created_at: (Date.today.beginning_of_day..Date.today.end_of_day))
-
-		if !@stock_value
-			@stock_value = StockValue.new({stock: @stock, value: value})
-		end
+		@stock_value = StockValue.find_by(value: value, created_at: today_range)
+		@stock_value = StockValue.new({stock: @stock, value: value}) if @stock_value.nil?
 
 		if @stock.save && @stock_value.save
 			redirect_to stock_value_url(@stock_value), notice: 'Stock was successfully created.'

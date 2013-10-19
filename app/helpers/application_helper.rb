@@ -5,19 +5,6 @@ module ApplicationHelper
 		(Date.today.beginning_of_day..Date.today.end_of_day)
 	end
 	
-	# sem3.products_field( "cat_id", 4992 )
-	# sem3.products_field( "brand", "Toshiba" )
-	# sem3.products_field( "weight", "gte", 1000000 )
-	# sem3.products_field( "weight", "lt", 1500000 )
-	# sem3.products_field( "sitedetails", "name", "newegg.com" )
-	# sem3.products_field( "sitedetails", "latestoffers", "currency", "USD" )
-	# sem3.products_field( "sitedetails", "latestoffers", "price", "gte", 100 )
-	
-	
-	# Let's view the JSON query we just constructed. This is a good starting point to debug, if you are getting incorrect 
-	# results for your query
-	# constructedJson = sem3.get_query_json("products")
-	
 	def product_under_price(price)
 		#products_under_price price
 		@item_values = ItemValue.where(value: (0..price))
@@ -30,43 +17,40 @@ module ApplicationHelper
 	API_SECRET = 'MWNhODYxZTNiYjcwYTlhZmUwN2Q4MzY3NTJlYmY4NWU'
 	
 	def sem3
-		@sem3 ||= Semantics3::Products.new(API_KEY,API_SECRET)
+		@sem3 ||= Semantics3::Products.new(API_KEY, API_SECRET)
 	end
 	
-	def products_under_price(price)
-		sem3
+	def load_products(max = 5)
+		sem3.products_field("cat_id", 13658)
+		sem3.products_field("sitedetails", "latestoffers", "currency", "USD" )
 		
-		@sem3.products_field("cat_id", 13658)
-		@sem3.products_field("sitedetails", "latestoffers", "currency", "USD" )
-		@sem3.products_field("sitedetails", "latestoffers", "price", "gte", 0)
-		@sem3.products_field("sitedetails", "latestoffers", "price", "lt", price)
-		
-		# Make the query
 		productsHash = sem3.get_products
 		
-		# View the results of the query
-		# Rails.logger.debug productsHash.to_json
-		Rails.logger.debug productsHash.class
-		
-		productsHash["results"].each do |product|
-			Rails.logger.debug product
-		  
-		  product_name = product["name"]
-		  product_url = product["sitedetails"].first["url"]
+		page = 0
+		while (page < max)
+			page = page + 1
 			
-			@item = Item.find_by(name: product_name)
-			@item = Item.new({name: product_name, img_source: product_url}) if @item.nil?
-			if !@item.save
-				Rails.logger.debug "Error saving item object: #{@item.errors}"
-			else
-				product_price = product["price"]
-				@item_value = ItemValue.find_by(value: product_price, created_at: today_range)
-				@item_value = ItemValue.new({value: product_price, item: @item}) if @item_value.nil?
+			productsHash["results"].each do |product|
+				product_name = product["name"]
+				product_base_url = product["sitedetails"].first["name"]
+				product_full_url = product["sitedetails"].first["url"]
 				
-				if !@item_value.save
-					Rails.logger.debug "Error saving item_value object #{@item_value.errors}"
+				@item = Item.find_by(name: product_name)
+				@item = Item.new({name: product_name, base_site: product_base_url, full_site: product_full_url}) if @item.nil?
+				if !@item.save
+					Rails.logger.debug "Error saving item object: #{@item.errors}"
+				else
+					product_price = product["price"]
+					@item_value = ItemValue.find_by(value: product_price, created_at: today_range)
+					@item_value = ItemValue.new({value: product_price, item: @item}) if @item_value.nil?
+					
+					if !@item_value.save
+						Rails.logger.debug "Error saving item_value object #{@item_value.errors}"
+					end
 				end
 			end
+			
+			productsHash = sem3.iterate_products
 		end
 	end
 end

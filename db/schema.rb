@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131019155344) do
+ActiveRecord::Schema.define(version: 20131019194305) do
 
   create_table "decisions", force: true do |t|
     t.integer  "item_value_id"
@@ -34,11 +34,12 @@ ActiveRecord::Schema.define(version: 20131019155344) do
   add_index "item_values", ["item_id"], name: "index_item_values_on_item_id", using: :btree
 
   create_table "items", force: true do |t|
-    t.string   "img_ref"
     t.string   "name"
-    t.string   "img_source"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "img_url"
+    t.string   "base_site"
+    t.string   "full_site"
   end
 
   create_table "stock_values", force: true do |t|
@@ -54,6 +55,7 @@ ActiveRecord::Schema.define(version: 20131019155344) do
     t.string   "stock_symbol"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "img_url"
   end
 
 end
