@@ -6,25 +6,28 @@ module ApplicationHelper
 	end
 	
 	def product_under_price(price)
-		#products_under_price price
+		load_products(1, 19)
 		@item_values = ItemValue.where(value: (0..price))
 		@item_values = @item_values.uniq { |item_value| item_value.item.id }
 		@item_values.sample
 	end
 	
 	private
-	API_KEY = 'SEM3547B8A069D38345D3EA45A5705E41112'
-	API_SECRET = 'MWNhODYxZTNiYjcwYTlhZmUwN2Q4MzY3NTJlYmY4NWU'
-	
-	def sem3
-		@sem3 ||= Semantics3::Products.new(API_KEY, API_SECRET)
-	end
-	
-	def load_products(max = 5)
-		sem3.products_field("cat_id", 13658)
-		sem3.products_field("sitedetails", "latestoffers", "currency", "USD" )
+  API_KEY = 'SEM3547B8A069D38345D3EA45A5705E41112'
+  API_SECRET = 'MWNhODYxZTNiYjcwYTlhZmUwN2Q4MzY3NTJlYmY4NWU'
+  
+	def load_products(max = 5, le = 0)
+  	@sem3 ||= Semantics3::Products.new(API_KEY, API_SECRET)
+  	@sem3.clear
+    @sem3.products_field("cat_id", 13658)
+    @sem3.products_field("sitedetails", "latestoffers", "currency", "USD" )
+    @sem3.products_field("sitedetails", "latestoffers", "price", "gte", le - 1) if le > 0
+    @sem3.products_field("sort", "price", "asc");
 		
-		productsHash = sem3.get_products
+		constructedJson = @sem3.get_query_json("products")
+		Rails.logger.debug constructedJson
+		
+		productsHash = @sem3.get_products
 		
 		page = 0
 		while (page < max)
