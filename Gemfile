@@ -48,3 +48,6 @@ gem 'simplecov'
 gem 'haml-rails'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
+
+# APIs
+gem 'yahoo_finance'
