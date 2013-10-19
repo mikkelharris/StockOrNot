@@ -20,7 +20,9 @@ class StocksController < ApplicationController
 		@stock_value = StockValue.new({stock: @stock, value: value}) if @stock_value.nil?
 
 		if @stock.save && @stock_value.save
-			redirect_to stock_value_url(@stock_value), notice: 'Stock was successfully created.'
+			@decision = Decision.new
+			@decision.stock_value = @stock_value
+			redirect_to decision_url(@decision), notice: 'Stock was successfully created.' if @decision.save
 		else
 			redirect_to :root
 		end
