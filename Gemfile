@@ -50,3 +50,4 @@ gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 
 # APIs
+gem 'semantics3'
