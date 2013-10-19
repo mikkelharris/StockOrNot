@@ -1,26 +1,36 @@
 class StocksController < ApplicationController
+	include StocksHelper
+
 	def show
 	end
-	
+
 	def new
-  	@stock = Stock.new
-  end
-  
-  def create
-	  @stock = Stock.find_by(stock_symbol: stock_params[:stock_symbol])
-	  if !@stock
-		  @stock = Stock.new(stock_params)
+		@stock = Stock.new
+	end
+
+	def create
+		stock_params[:stock_symbol] = stock_params[:stock_symbol].upcase
+
+		@stock = Stock.find_by(stock_symbol: stock_params[:stock_symbol])
+		if !@stock
+			@stock = Stock.new(stock_params)
 		end
-  
-  	if @stock.save
-  		redirect_to root_path, notice: 'Stock was successfully created.'
-  	else
-  		redirect_to :root
-  	end
-  end
-  
-  private
-  def stock_params
-	  params.require(:stock).permit(:stock_symbol)
+
+		value = get_value_for_symbol(@stock.stock_symbol)
+		@stock_value = StockValue.find_by(value: value, created_at: (Date.today.beginning_of_day..Date.today.end_of_day))
+		if !@stock_value
+			@stock_value = StockValue.new({stock_id: @stock.id, value: value})
+		end
+
+		if @stock.save && @stock_value.save
+			redirect_to @stock, notice: 'Stock was successfully created.'
+		else
+			redirect_to :root
+		end
+	end
+
+	private
+	def stock_params
+		params.require(:stock).permit(:stock_symbol)
 	end
 end

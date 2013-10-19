@@ -11,39 +11,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131019124252) do
+ActiveRecord::Schema.define(version: 20131019155344) do
 
   create_table "decisions", force: true do |t|
-    t.integer "item_value_id"
-    t.integer "stock_value_id"
-    t.integer "winner"
+    t.integer  "item_value_id"
+    t.integer  "stock_value_id"
+    t.integer  "winner"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "decisions", ["item_value_id"], name: "index_decisions_on_item_value_id", using: :btree
   add_index "decisions", ["stock_value_id"], name: "index_decisions_on_stock_value_id", using: :btree
 
   create_table "item_values", force: true do |t|
-    t.float   "value"
-    t.integer "item_id"
+    t.float    "value"
+    t.integer  "item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "item_values", ["item_id"], name: "index_item_values_on_item_id", using: :btree
 
   create_table "items", force: true do |t|
-    t.string "img_ref"
-    t.string "name"
-    t.string "img_source"
+    t.string   "img_ref"
+    t.string   "name"
+    t.string   "img_source"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "stock_values", force: true do |t|
-    t.float   "value"
-    t.integer "stock_id"
+    t.float    "value"
+    t.integer  "stock_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "stock_values", ["stock_id"], name: "index_stock_values_on_stock_id", using: :btree
 
   create_table "stocks", force: true do |t|
-    t.string "stock_symbol"
+    t.string   "stock_symbol"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
