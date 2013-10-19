@@ -25,7 +25,9 @@ class StocksController < ApplicationController
 		end
 
 		if @stock.save && @stock_value.save
-			redirect_to stock_value_url(@stock_value), notice: 'Stock was successfully created.'
+			@decision = Decision.new
+			@decision.stock_value = @stock_value
+			redirect_to decision_url(@decision), notice: 'Stock was successfully created.' if @decision.save
 		else
 			redirect_to :root
 		end
