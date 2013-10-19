@@ -1,5 +1,6 @@
 = form_for @stock do |f|
   %fieldset
     .control-group.text-center
-      = f.text_field :stock_symbol, :placeholder => "BBRY, APPL, etc"
-      = f.submit 'Search', :class => "btn"
+      = f.text_field :stock_symbol, :placeholder => "APPL, BBRY, etc", :class => "stock_input"
+      = f.submit "Search", :class => "btn"
+  %p.text-center.blurb Search your favourite(or least favourite) stock and find out what you can buy for it!
