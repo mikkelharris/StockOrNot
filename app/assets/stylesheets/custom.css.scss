@@ -1,0 +1,22 @@
+body{
+background-image:url(image_path('random_grey_variations.png'));
+color:white;
+}
+.logo {
+  padding-left: 20px;
+  padding-top: 20px;
+  font-size: 5em;
+}
+
+a{
+  text-decoration: none;
+  color: white;
+  &:visited{
+    text-decoration: none;
+    color: white;
+  }
+  &:hover{
+    text-decoration: none;
+    color:green;
+  }
+}

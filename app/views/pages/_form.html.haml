@@ -1,5 +1,5 @@
 = form_for @stock do |f|
   %fieldset
-    .control-group
-      = f.text_field :stock_symbol
-      = f.submit 'Search'
+    .control-group.text-center
+      = f.text_field :stock_symbol, :placeholder => "BBRY"
+      = f.submit 'Search', :class => "btn"
