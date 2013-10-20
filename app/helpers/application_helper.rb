@@ -6,18 +6,8 @@ module ApplicationHelper
 	end
 	
 	def product_under_price(price)
-		load_products(1, price)
-		range = nil
-		if price <= 20
-			range = 1..20
-		elsif price > 20 && price < 100
-			range = (price * 0.5)..price
-		else
-			range = (price * 0.9)..price
-		end
-
-		@item_values = ItemValue.where(value: range)
-		@item_values = @item_values.uniq { |item_value| item_value.item.id }
+		# load_products(1, price)
+		@item_values = ItemValue.where("value <= #{price}").order("value DESC").limit(10)
 		@item_values.sample
 	end
 	
