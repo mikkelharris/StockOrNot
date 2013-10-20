@@ -11,6 +11,10 @@ module ApplicationHelper
 		@item_values.sample
 	end
 	
+	def load_database(pages, le)
+		load_products(pages, le)
+	end
+	
 	private
   API_KEY = 'SEM3547B8A069D38345D3EA45A5705E41112'
   API_SECRET = 'MWNhODYxZTNiYjcwYTlhZmUwN2Q4MzY3NTJlYmY4NWU'
