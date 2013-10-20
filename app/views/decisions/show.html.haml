@@ -1,2 +1,6 @@
-%h3.text-center #{@decision.stock_value.stock.stock_symbol}
-%h3.text-center  Value: $#{@decision.stock_value.value}
+.pull-left
+  %h3.text-center #{@decision.stock_value.stock.stock_symbol}
+  %h3.text-center  Value: $#{@decision.stock_value.value}
+.pull-right
+  %h3.text-center #{@decision.item_value.item.name}
+  %h3.text-center  Value: $#{@decision.item_value.value}
