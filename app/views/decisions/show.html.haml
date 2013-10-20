@@ -17,9 +17,11 @@
     .item.center
       %h3.text-center #{@decision.stock_value.stock.stock_symbol.upcase}
       %h3.text-center  Value: $#{@decision.stock_value.value}
+      = render 'stock_tweet'
   - elsif @decision.winner == 2
     .winner.center
       %h4.text-center You sold your #{@decision.stock_value.stock.stock_symbol.upcase} stock for a #{@decision.item_value.item.name}
     .product.center
       %h3.text-center #{@decision.item_value.item.name}
       %h3.text-center  Value: $#{@decision.item_value.value}
+      = render 'item_tweet'
