@@ -1,6 +1,14 @@
 .content
   = form_for @stock do |f|
     %fieldset
+      .form-inline.text-center
+        = f.radio_button :stock_exchange, '', :selected => true, :style => "margin-bottom:10px"
+        = f.label :USA, 'USA'
+        = f.radio_button :stock_exchange, 'TO', :style => "margin-bottom:10px"
+        = f.label :Toronto, 'Toronto'
+        = f.radio_button :stock_exchange, 'L', :style => "margin-bottom:10px"
+        = f.label :London, 'London'
+      %br
       .control-group.text-center
         = f.text_field :stock_symbol, :placeholder => "AAPL, BBRY, etc", :class => "stock_input"
         = f.submit "Search", :class => "btn"
