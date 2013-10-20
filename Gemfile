@@ -49,5 +49,8 @@ gem 'haml-rails'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 
+# SCRAPE ME
+gem 'mechanize'
+
 # APIs
 gem 'semantics3'
