@@ -2,12 +2,12 @@
   = form_for @stock do |f|
     %fieldset
       .form-inline.text-center
-        = f.radio_button :stock_exchange, '', :selected => true, :style => "margin-bottom:10px"
-        = f.label :USA, 'USA'
+        = f.radio_button :stock_exchange, 'USA', :checked => true, :style => "margin-bottom:10px"
+        = f.label :stock_exchange, 'USA', :value => 'USA'
         = f.radio_button :stock_exchange, 'TO', :style => "margin-bottom:10px"
-        = f.label :Toronto, 'Toronto'
+        = f.label :stock_exchange, 'Toronto', :value => 'TO'
         = f.radio_button :stock_exchange, 'L', :style => "margin-bottom:10px"
-        = f.label :London, 'London'
+        = f.label :stock_exchange, 'London', :value => 'L'
       %br
       .control-group.text-center
         = f.text_field :stock_symbol, :placeholder => "AAPL, BBRY, etc", :class => "stock_input"

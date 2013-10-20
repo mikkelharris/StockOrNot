@@ -1,25 +1,33 @@
 .content.no-alpha
   - if @decision.winner == nil
-    .item.pull-left
-      %h3.text-center #{@decision.stock_value.stock.stock_symbol.upcase}
-      %h3.text-center  Value: $#{@decision.stock_value.value}
-      .text-center
-        = link_to 'Choose Stock', decision_path(:decision => {:winner => 1}), :method=> :put, :class => 'btn'
-    .product.pull-right
-      %h3.text-center #{@decision.item_value.item.name}
-      = image_tag(@decision.item_value.item.img_url)
-      %h3.text-center  Value: $#{@decision.item_value.value}
-      .text-center
-        = link_to 'Choose Product', decision_path(:decision => {:winner => 2}), :method=> :put, :class => 'btn'
+    .item.pull-left.decision-size
+      .top-bar
+        %h3.text-center #{@decision.stock_value.stock.stock_symbol.upcase} - #{@decision.stock_value.stock.name}
+        %h3.text-center  #{@decision.stock_value.stock.stock_exchange}
+      .center-bar
+      .bottom-bar
+        %h3.text-center  Value: $#{number_with_precision(@decision.stock_value.value, :precision => 2)}
+        .text-center
+          = link_to 'Choose Stock', decision_path(:decision => {:winner => 1}), :method=> :put, :class => 'btn'
+    .product.pull-right.decision-size
+      .top-bar
+        %h3.text-center #{truncate(@decision.item_value.item.name, :length => 38)}
+      .center-bar{ :style => "background:url(#{@decision.item_value.item.img_url}) no-repeat center center;"}
+      .bottom-bar
+        %h3.text-center  Value: $#{number_with_precision(@decision.item_value.value, :precision => 2)}
+        .text-center
+          = link_to 'Choose Product', decision_path(:decision => {:winner => 2}), :method=> :put, :class => 'btn'
   - elsif @decision.winner == 1
-    .winner.center
-      %h4.text-center You decided to keep your #{@decision.stock_value.stock.stock_symbol.upcase} stock! Good Luck!!
     .item.center
-      %h3.text-center #{@decision.stock_value.stock.stock_symbol.upcase}
-      %h3.text-center  Value: $#{@decision.stock_value.value}
+      .top-bar
+        %h3.text-center You chose #{@decision.stock_value.stock.stock_symbol.upcase} stock over #{@decision.item_value.item.name}!
+      .center-bar
+      .bottom-bar
+        %h3.text-center  Value: $#{number_with_precision(@decision.stock_value.value, :precision => 2)}
   - elsif @decision.winner == 2
-    .winner.center
-      %h4.text-center You sold your #{@decision.stock_value.stock.stock_symbol.upcase} stock for a #{@decision.item_value.item.name}
     .product.center
-      %h3.text-center #{@decision.item_value.item.name}
-      %h3.text-center  Value: $#{@decision.item_value.value}
+      .top-bar
+        %h3.text-center You chose #{@decision.item_value.item.name} over #{@decision.stock_value.stock.stock_symbol.upcase} stock!
+      .center-bar{ :style => "background:url(#{@decision.item_value.item.img_url}) no-repeat center center;"}
+      .bottom-bar
+        %h3.text-center  Value: $#{number_with_precision(@decision.item_value.value, :precision => 2)}

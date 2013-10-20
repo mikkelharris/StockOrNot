@@ -3,6 +3,8 @@ body{
   color:#FFF;
   height:100%;
   font-family: "avenir";
+  margin: 0; 
+  padding: 0;
 }
 .logo {
   padding-left: 40px;
@@ -53,26 +55,68 @@ fieldset{
   font-size:2em;
   line-height: 1.5em;
 }
-.item{
+.center{
+  margin: 0 auto;
+  width: 75%;
+}
+.decision-size{
   width: 40%;
-  height: 400px;
+}
+.item{
+  min-height: 510px;
   background-color: rgba(0,0,0,.25);
+  img {
+    width: 75%;
+    margin: 0 auto;
+    max-height: 300px;
+    display: block;
+  }
+  
 }
 .product{
-  width: 40%;
-  height: 400px;
+  min-height: 510px;
   background-color: rgba(0,0,0,.25);
 }
-.winner{
-  width: 40%;
-  height: 50px;
+.top-bar{
+  min-height: 110px;
+  padding:0 20px;
   background-color: rgba(0,0,0,.25);
+  h3{
+    margin: 0px;
+    padding:15px;
+    -webkit-margin-before:0;
+    -webkit-margin-after:0;
+    -webkit-margin-start:0;
+    -webkit-margin-end:0;
+  }
+}
+.center-bar{
+  padding:20px;
+  height: 300px;
+  // background-size: 75%;
+}
+.bottom-bar{
+  padding:0 20px 20px;
+  height: 100px;
+  background-color: rgba(0,0,0,.25);
+  h3{
+    margin: 0px;
+    padding:15px;
+  }
+}
+.winner{
+  height: 100%;
+  background-color: rgba(0,0,0,.25);
+  margin-bottom: 20px;
+  h4{
+    padding: 0px;
+  }
+}
+.inner{
+  padding: 10px;
 }
 .no-alpha{
   background-color: rgba(0,0,0, 0);
-}
-.center{
-  margin: 0 auto;
 }
 .radio {
   margin-bottom: 5px;

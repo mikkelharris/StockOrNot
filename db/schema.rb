@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131020142531) do
+ActiveRecord::Schema.define(version: 20131020221357) do
 
   create_table "decisions", force: true do |t|
     t.integer  "item_value_id"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20131020142531) do
     t.string   "img_url"
     t.string   "stock_exchange"
     t.string   "name"
+    t.string   "stock_search"
   end
 
 end
