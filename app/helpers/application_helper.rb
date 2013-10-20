@@ -6,8 +6,17 @@ module ApplicationHelper
 	end
 	
 	def product_under_price(price)
-		load_products(1, 19)
-		@item_values = ItemValue.where(value: (0..price))
+		load_products(1, price)
+		range = nil
+		if price <= 20
+			range = 1..20
+		elsif price > 20 && price < 100
+			range = (price * 0.5)..price
+		else
+			range = (price * 0.9)..price
+		end
+
+		@item_values = ItemValue.where(value: range)
 		@item_values = @item_values.uniq { |item_value| item_value.item.id }
 		@item_values.sample
 	end
@@ -21,12 +30,11 @@ module ApplicationHelper
   	@sem3.clear
     @sem3.products_field("cat_id", 13658)
     @sem3.products_field("sitedetails", "latestoffers", "currency", "USD" )
-    @sem3.products_field("sitedetails", "latestoffers", "price", "gte", le - 1) if le > 0
-    @sem3.products_field("sort", "price", "asc");
+    @sem3.products_field("sitedetails", "latestoffers", "price", le - 1) if le > 0
+    @sem3.products_field("sort", "price", "asc")
 		
 		constructedJson = @sem3.get_query_json("products")
-		Rails.logger.debug constructedJson
-		
+		Rails.logger.debug ">>>>>>>#{constructedJson}"
 		productsHash = @sem3.get_products
 		
 		page = 0
@@ -34,6 +42,7 @@ module ApplicationHelper
 			page = page + 1
 			
 			productsHash["results"].each do |product|
+				next if product["sitedetails"].nil?
 				product_name = product["name"]
 				product_base_url = product["sitedetails"].first["name"]
 				product_full_url = product["sitedetails"].first["url"]
@@ -53,7 +62,7 @@ module ApplicationHelper
 				end
 			end
 			
-			productsHash = sem3.iterate_products
+			productsHash = @sem3.iterate_products
 		end
 	end
 end

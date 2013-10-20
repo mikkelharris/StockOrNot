@@ -1,13 +1,21 @@
 body{
 background-image:url(image_path('random_grey_variations.png'));
 color:white;
+height:100%
 }
 .logo {
-  padding-left: 20px;
+  padding-left: 40px;
   padding-top: 20px;
   font-size: 5em;
+  img {
+    height: 100px;
+  }
 }
-
+.alpha-div{
+  width: 100%;
+  height: 125px;
+  background-color: rgba(0,0,0,.5)
+}
 a{
   text-decoration: none;
   color: white;
@@ -21,7 +29,20 @@ a{
   }
 }
 fieldset{
-  padding-top: 50px;
+  padding-top: 10px;
+  width:100%
+}
+.content{
+  width: 75%;
+  min-height: 100%;
+  height: auto;
+  margin: 0 auto;
+  background-color: rgba(0,0,0,.25);
+  margin-top: 50px;
+  padding-top: 20px;
+  padding-left:50px;
+  padding-right:50px;
+  padding-bottom: 20px;
 }
 .btn{
   margin-bottom: 10px;
@@ -29,4 +50,5 @@ fieldset{
 .blurb{
   padding-top: 20px;
   font-size:2em;
+  line-height: 1.5em;
 }
