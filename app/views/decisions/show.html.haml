@@ -24,6 +24,7 @@
       .center-bar
       .bottom-bar
         %h3.text-center  Value: $#{number_with_precision(@decision.stock_value.value, :precision => 2)}
+        = render 'stock_tweet'
   - elsif @decision.winner == 2
     .product.center
       .top-bar
@@ -31,3 +32,4 @@
       .center-bar{ :style => "background:url(#{@decision.item_value.item.img_url}) no-repeat center center;"}
       .bottom-bar
         %h3.text-center  Value: $#{number_with_precision(@decision.item_value.value, :precision => 2)}
+        = render 'item_tweet'

@@ -6,9 +6,9 @@ module ApplicationHelper
 	end
 	
 	def product_under_price(price)
-		# load_products(1, price)
-		@item_values = ItemValue.where("value <= #{price}").order("value DESC").limit(10)
-		@item_values.sample
+		# @item_value = ItemValue.where("value <= ? AND item.img_url IS NOT NULL", price).order("value DESC").limit(1)
+		@item_value = ItemValue.where("value <= ?", price).order("value DESC").limit(1) #unless !@item_value.nil?
+		@item_value.first
 	end
 	
 	def load_database(pages, le)

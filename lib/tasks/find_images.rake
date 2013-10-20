@@ -4,9 +4,10 @@ include ItemsHelper
 
 namespace :items do
   task :get_images => :environment do
-    @items = Item.where("img_url IS NULL OR img_url = ? AND full_site IS NOT NULL", '')
+    sites = %w{walmart.com newegg.com frys.com radioshack.com}
+    @items = Item.where("base_site IN (?) AND (img_url = ? OR img_url IS NULL)", sites, '')
     @items.each do |item|
-      puts item.id
+      puts "#{item.id}: #{item.base_site} - #{item.full_site}"
       item.img_url = get_image item
       item.save
     end
