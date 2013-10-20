@@ -7,6 +7,7 @@
         = link_to 'Choose Stock', decision_path(:decision => {:winner => 1}), :method=> :put, :class => 'btn'
     .product.pull-right
       %h3.text-center #{@decision.item_value.item.name}
+      = image_tag(@decision.item_value.item.img_url)
       %h3.text-center  Value: $#{@decision.item_value.value}
       .text-center
         = link_to 'Choose Product', decision_path(:decision => {:winner => 2}), :method=> :put, :class => 'btn'
