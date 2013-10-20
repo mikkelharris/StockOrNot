@@ -1,7 +1,7 @@
 body{
-background-image:url(image_path('random_grey_variations.png'));
-color:white;
-height:100%
+  background-image:url(image_path('random_grey_variations.png'));
+  color:#FFF;
+  height:100%
 }
 .logo {
   padding-left: 40px;
@@ -18,10 +18,10 @@ height:100%
 }
 a{
   text-decoration: none;
-  color: white;
+  color: #FFF;
   &:visited{
     text-decoration: none;
-    color: white;
+    color: #FFF;
   }
   &:hover{
     text-decoration: none;
@@ -51,4 +51,25 @@ fieldset{
   padding-top: 20px;
   font-size:2em;
   line-height: 1.5em;
+}
+.item{
+  width: 40%;
+  height: 400px;
+  background-color: rgba(0,0,0,.25);
+}
+.product{
+  width: 40%;
+  height: 400px;
+  background-color: rgba(0,0,0,.25);
+}
+.winner{
+  width: 40%;
+  height: 50px;
+  background-color: rgba(0,0,0,.25);
+}
+.no-alpha{
+  background-color: rgba(0,0,0, 0);
+}
+.center{
+  margin: 0 auto;
 }

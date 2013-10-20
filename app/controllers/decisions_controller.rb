@@ -16,11 +16,20 @@ class DecisionsController < ApplicationController
     end
   end
 
+  def update
+    if @decision.update_attributes(decision_params)
+      redirect_to @decision
+    else
+       redirect_to :root
+    end
+  end
+  
   private
+
   def set_decision
     @decision = Decision.find(params[:id])
   end
-  def stock_params
+  def decision_params
     params.require(:decision).permit(:stock_value, :item_value, :winner)
   end
 end

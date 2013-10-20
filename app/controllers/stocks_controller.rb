@@ -23,7 +23,6 @@ class StocksController < ApplicationController
 			@decision = Decision.new
 			@decision.stock_value = @stock_value
 			@decision.item_value = product_under_price(@stock_value.value)
-			Rails.logger.debug ">>>#{product_under_price(@stock_value.value)}"
 			redirect_to decision_url(@decision), notice: 'Stock was successfully created.' if @decision.save
 		else
 			redirect_to :root
