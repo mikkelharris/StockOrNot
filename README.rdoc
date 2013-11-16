@@ -1,28 +1,9 @@
-== README
+== StockOrNot
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is our entry for the 2013 RailsRumble!
 
-Things you may want to cover:
+It was a fun test to see what we could make in a 48 hour period
 
-* Ruby version
+* Enter the stock symbol of your choice and be presented with two options
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* Select the the stock or the product of equal or lesser value
